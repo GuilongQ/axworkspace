@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="login" class="com.feicui.web.interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="login"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="input">/index.jsp</result>
+			<result name="fail">/WEB-INF/form/fail.jsp</result>
+			<result name="success">/WEB-INF/form/success.jsp</result>
+		</global-results>
+		<global-allowed-methods>
+			findStudentByRoom,saveUI,updateUI,findUI,update,login,logout,editPwd,find,isUsernameExists,findOne,reportUI
+			,reportListUI,sendUI,send
+		</global-allowed-methods>
+		
+		<action name="user_*" class="userAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="saveUI">/WEB-INF/users/saveUI.jsp</result>
+			<result name="findUI">/WEB-INF/users/findUI.jsp</result>
+			<result name="findOneUI">/WEB-INF/users/findOneUI.jsp</result>
+			<result name="updateUI">/WEB-INF/users/updateUI.jsp</result>
+		</action>
+		
+		<action name="trusteetype_*" class="trusteetypeAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="findUI">/WEB-INF/trusteetypes/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/trusteetypes/updateUI.jsp</result>
+		</action>
+		
+		
+		<action name="role_*" class="roleAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="findUI">/WEB-INF/roles/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/roles/updateUI.jsp</result>
+		</action>
+		
+		<action name="teachmode_*" class="teachmodeAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="findUI">/WEB-INF/teachmodes/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/teachmodes/updateUI.jsp</result>
+		</action>
+		
+		<action name="room_*" class="roomAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="findUI">/WEB-INF/rooms/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/rooms/updateUI.jsp</result>
+		</action>
+		<action name="course_*" class="courseAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="findUI">/WEB-INF/courses/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/courses/updateUI.jsp</result>
+		</action>
+		<action name="homework_*" class="homeworkAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="saveUI">/WEB-INF/homeworks/saveUI.jsp</result>
+			<result name="findUI">/WEB-INF/homeworks/findUI.jsp</result>
+			<result name="updateUI">/WEB-INF/homeworks/updateUI.jsp</result>
+		</action>
+		<action name="score_*" class="scoreAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="saveUI">/WEB-INF/scores/saveUI.jsp</result>
+			<result name="findUI">/WEB-INF/scores/findUI.jsp</result>
+			<result name="reportUI">/WEB-INF/scores/reportUI.jsp</result>
+			<result name="reportListUI">/WEB-INF/scores/reportListUI.jsp</result>
+		</action>
+		<action name="email_*" class="emailAction" method="{1}">
+			<result name="sendUI">/WEB-INF/emails/sendUI.jsp</result>
+		</action>
+		<action name="login_*" class="loginAction" method="{1}">
+			<result name="success" type="redirectAction">_home_UI</result>
+			
+		</action>
+		
+		<action name="logout_*" class="logoutAction" method="{1}">
+		</action>
+
+		<action name="*_*_UI">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result>/WEB-INF/{1}/{2}.jsp</result>
+		</action>
+	</package>
+</struts>

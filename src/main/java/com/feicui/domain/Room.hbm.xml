@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-31 15:28:54 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.feicui.domain.Room" table="room" catalog="ax" optimistic-lock="version">
+        <id name="roomid" type="java.lang.Integer">
+            <column name="roomid" />
+            <generator class="identity" />
+        </id>
+        <property name="position" type="string">
+            <column name="position" length="100" />
+        </property>
+        <property name="rent" type="java.lang.Integer">
+            <column name="rent" />
+        </property>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="roomid" />
+            </key>
+            <one-to-many class="com.feicui.domain.User" />
+        </set>
+    </class>
+</hibernate-mapping>

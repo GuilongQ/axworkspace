@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-31 15:28:54 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.feicui.domain.Homework" table="homework" catalog="ax" optimistic-lock="version">
+        <id name="homeworkid" type="java.lang.Integer">
+            <column name="homeworkid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.feicui.domain.User" fetch="select">
+            <column name="uid" />
+        </many-to-one>
+        <property name="info" type="string">
+            <column name="info" length="100" />
+        </property>
+        <property name="cdate" type="date">
+            <column name="cdate" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

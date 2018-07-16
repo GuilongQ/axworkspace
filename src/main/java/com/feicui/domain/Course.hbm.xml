@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-31 15:28:54 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.feicui.domain.Course" table="course" catalog="ax" optimistic-lock="version">
+        <id name="courseid" type="java.lang.Integer">
+            <column name="courseid" />
+            <generator class="identity" />
+        </id>
+        <property name="cname" type="string">
+            <column name="cname" length="20" />
+        </property>
+        <property name="info" type="string">
+            <column name="info" length="100" />
+        </property>
+        <set name="scores" table="score" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="courseid" />
+            </key>
+            <one-to-many class="com.feicui.domain.Score" />
+        </set>
+    </class>
+</hibernate-mapping>

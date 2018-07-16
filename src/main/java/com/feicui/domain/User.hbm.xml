@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-5-31 15:28:54 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.feicui.domain.User" table="user" catalog="ax" optimistic-lock="version">
+        <id name="uid" type="java.lang.Integer">
+            <column name="uid" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="room" class="com.feicui.domain.Room" fetch="select">
+            <column name="roomid" />
+        </many-to-one>
+        <many-to-one name="teachmode" class="com.feicui.domain.Teachmode" fetch="select">
+            <column name="teachmodeid" />
+        </many-to-one>
+        <many-to-one name="trusteetype" class="com.feicui.domain.Trusteetype" fetch="select">
+            <column name="trusteetypeid" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="40" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="40" />
+        </property>
+        <property name="realname" type="string">
+            <column name="realname" length="40" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="10" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" length="10" />
+        </property>
+        <property name="cellphone" type="string">
+            <column name="cellphone" length="11" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="40" />
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="price" precision="10" />
+        </property>
+        <property name="sal" type="big_decimal">
+            <column name="sal" precision="10" />
+        </property>
+        <set name="roles" table="role_user" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="uid" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.feicui.domain.Role">
+                <column name="rid" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="homeworks" table="homework" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="com.feicui.domain.Homework" />
+        </set>
+        <set name="scores" table="score" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="com.feicui.domain.Score" />
+        </set>
+    </class>
+</hibernate-mapping>
